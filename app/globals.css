@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* gender */
+  --der: #2563eb;
+  --die: #dc2626;
+  --das: #16a34a;
+  --pl: #ca8a04;
+  /* cases */
+  --case-n: #64748b;
+  --case-a: #ea580c;
+  --case-d: #7c3aed;
+  --case-g: #0d9488;
+  /* sentence parts (S/DO/IO/OWN reuse the case colors they map to) */
+  --part-v: #e11d48;
+  --part-where: #65a30d;
+  --part-when: #db2777;
+  /* surfaces */
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #d9e0e8;
+  --accent: #1d4ed8;
+  --ok: #15803d;
+  --ok-bg: #dcfce7;
+  --bad: #b91c1c;
+  --bad-bg: #fee2e2;
+  --mark: #fde68a;
+  color-scheme: light;
+}
+.dark {
+  --der: #60a5fa;
+  --die: #f87171;
+  --das: #4ade80;
+  --pl: #facc15;
+  --case-n: #94a3b8;
+  --case-a: #fb923c;
+  --case-d: #a78bfa;
+  --case-g: #2dd4bf;
+  --part-v: #fb7185;
+  --part-where: #a3e635;
+  --part-when: #f472b6;
+  --bg: #0b1120;
+  --surface: #131c2e;
+  --surface-2: #1a2438;
+  --text: #e5e9f0;
+  --muted: #94a3b8;
+  --border: #2a3650;
+  --accent: #60a5fa;
+  --ok: #4ade80;
+  --ok-bg: #12301f;
+  --bad: #f87171;
+  --bad-bg: #3a1518;
+  --mark: #713f12;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-der: var(--der);
+  --color-die: var(--die);
+  --color-das: var(--das);
+  --color-pl: var(--pl);
+  --color-case-n: var(--case-n);
+  --color-case-a: var(--case-a);
+  --color-case-d: var(--case-d);
+  --color-case-g: var(--case-g);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+  --color-mark: var(--mark);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+
+
+
+@layer components {
+/* case block: outlined box with the case letter as a tag */
+.case-block {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.3em;
+  border: 2px solid var(--c);
+  border-radius: 8px;
+  padding: 0.05em 0.35em 0.05em 1.45em;
+  margin: 0.15em 0;
+}
+.case-block > .case-tag {
+  position: absolute;
+  left: 0.2em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.55em;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--surface);
+  background: var(--c);
+  border-radius: 4px;
+  padding: 0.2em 0.3em;
+}
+.big-field {
+  font-size: 24px;
+  line-height: 1.35;
+  min-height: 64px;
+}
+.tb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  border-radius: 10px;
+  padding: 0 0.6rem;
+  font-size: 16px;
+  border: 1px solid transparent;
+}
+.tb-btn:active {
+  transform: scale(0.97);
+}
+.tb-btn[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--surface);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 56px;
+  padding: 0 1.4rem;
+  border-radius: 14px;
+  font-size: 19px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn-primary {
+  background: var(--text);
+  color: var(--surface);
+  border-color: var(--text);
+}
+.btn:disabled {
+  opacity: 0.45;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.tbl {
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.tbl th,
+.tbl td {
+  border: 1px solid var(--border);
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  vertical-align: middle;
+}
+.tbl thead th {
+  background: var(--surface-2);
+  font-weight: 700;
+}
+.tbl tbody th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+}
