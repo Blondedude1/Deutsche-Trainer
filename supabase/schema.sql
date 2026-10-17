@@ -95,7 +95,7 @@ where a.correct = false;
 -- ───────────────────────── atomic import ─────────────────────────
 -- Called by /api/import with the already-validated JSON.
 create or replace function import_set(p jsonb) returns uuid
-language plpgsql as $$
+language plpgsql set search_path = public as $$
 declare
   new_id uuid;
   ex     jsonb;
